@@ -1,4 +1,4 @@
-package br.gov.serpro.academiadespo;
+package com.github.rodolfoba.academia;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import org.junit.Test;
+
+import com.github.rodolfoba.academia.Televisao;
 
 public class TelevisaoTest {
 

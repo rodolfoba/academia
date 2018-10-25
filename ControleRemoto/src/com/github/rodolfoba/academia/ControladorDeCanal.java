@@ -1,4 +1,4 @@
-package br.gov.serpro.academiadespo;
+package com.github.rodolfoba.academia;
 
 import java.util.LinkedList;
 import java.util.ListIterator;

@@ -1,8 +1,10 @@
-package br.gov.serpro.academiadespo;
+package com.github.rodolfoba.academia;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import com.github.rodolfoba.academia.ControladorDeVolume;
 
 public class ControladorDeVolumeTest {
 

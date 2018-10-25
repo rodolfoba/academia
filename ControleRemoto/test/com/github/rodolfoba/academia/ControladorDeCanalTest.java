@@ -1,4 +1,4 @@
-package br.gov.serpro.academiadespo;
+package com.github.rodolfoba.academia;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,6 +7,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.junit.Test;
+
+import com.github.rodolfoba.academia.ControladorDeCanal;
 
 public class ControladorDeCanalTest {
 
