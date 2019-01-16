@@ -71,11 +71,11 @@ public class BancoBeta implements BancoOperavel {
     }
 
     private ContaBancoBeta obterConta(IdentificadorDeConta identificadorDeConta) throws ContaNaoExistenteException {
-        if (null == identificadorDeConta || !(identificadorDeConta instanceof IdentificadorDeContaBancoBeta)) {
+        if (!(identificadorDeConta instanceof IdentificadorDeContaBancoBeta)) {
             throw new IllegalArgumentException("Identificador de conta inválido");
         }
         
-        return contas.stream().filter((c) -> c.getIdentificador().ehIgual(identificadorDeConta)).findFirst()
+        return contas.stream().filter(c -> c.getIdentificador().ehIgual(identificadorDeConta)).findFirst()
                 .orElseThrow(() -> new ContaNaoExistenteException("Conta não existente"));
     }
 }

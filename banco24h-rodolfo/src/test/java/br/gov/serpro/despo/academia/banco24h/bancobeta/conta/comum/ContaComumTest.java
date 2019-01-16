@@ -1,19 +1,18 @@
 package br.gov.serpro.despo.academia.banco24h.bancobeta.conta.comum;
 
-import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.HashSet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.gov.serpro.despo.academia.banco24h.banco.Movimentacao;
+import br.gov.serpro.despo.academia.banco24h.banco.SaldoInsuficienteException;
+import br.gov.serpro.despo.academia.banco24h.bancobeta.LimiteDeOperacoesPorDiaExcedido;
 import br.gov.serpro.despo.academia.banco24h.bancobeta.conta.IdentificadorDeContaBancoBeta;
-import br.gov.serpro.despo.academia.banco24h.bancobeta.conta.premium.SaqueContaPremium;
 import br.gov.serpro.despo.academia.banco24h.bancobeta.operacao.Deposito;
 import br.gov.serpro.despo.academia.banco24h.bancobeta.operacao.Saque;
 
@@ -71,7 +70,7 @@ public class ContaComumTest {
     public void debito() throws Exception {
         ContaComum conta = new ContaComum(identificador);
         valor = new BigDecimal("100");
-        SaqueContaPremium saque = new SaqueContaPremium(data, valor);
+        SaqueContaComum saque = new SaqueContaComum(data, valor);
         saque.executar(conta);
         
         BigDecimal valorEsperado = new BigDecimal("-101.500");
@@ -86,16 +85,18 @@ public class ContaComumTest {
     public void debitoComValorAcimaDoLimite() throws Exception {
         conta = new ContaComum(identificador);
         valor = BigDecimal.valueOf(201);
-//        movimentacao = new Saque(data, valor);
-//        assertThrows(SaldoInsuficienteException.class, () -> conta.movimentar(movimentacao));
+        Saque saque = new SaqueContaComum(data, valor);
+        assertThrows(SaldoInsuficienteException.class, () -> saque.executar(conta));
     }
     
     @Test
     public void limiteDeOperacoesPorDiaAlcancado() throws Exception {
+        valor = BigDecimal.ONE;
         conta = new ContaComum(identificador);
-//        conta.movimentar(new Deposito(data, BigDecimal.ONE));
-//        conta.movimentar(new Deposito(data, BigDecimal.ONE));
-//        assertThrows(LimiteDeOperacoesPorDiaExcedido.class, () -> conta.movimentar(new Deposito(data, BigDecimal.ONE)));
+        Saque saque = new SaqueContaComum(data, valor);
+        saque.executar(conta);
+        saque.executar(conta);
+        assertThrows(LimiteDeOperacoesPorDiaExcedido.class, () -> saque.executar(conta));
     }
     
 }

@@ -17,6 +17,8 @@ public class Factories {
         inicializaOperacoes();
     }
 
+    private Factories() {}
+    
     private static void inicializaOperacoes() {
         operacoes.put(ContaComum.class, new ContaComumOperacoesFactory());
         operacoes.put(ContaPremium.class, new ContaPremiumOperacoesFactory());

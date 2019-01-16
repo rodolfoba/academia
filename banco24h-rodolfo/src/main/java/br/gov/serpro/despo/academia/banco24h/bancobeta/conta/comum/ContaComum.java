@@ -11,7 +11,7 @@ import br.gov.serpro.despo.academia.banco24h.bancobeta.conta.ContaBancoBeta;
 
 public class ContaComum extends ContaBancoBeta {
 
-    private final static int LIMITE_DIARIO = 2;
+    private static final int LIMITE_DIARIO = 2;
     private final Map<LocalDate, Integer> operacoesPorDia = new HashMap<>();
     
     public ContaComum(IdentificadorDeConta identificador) {
